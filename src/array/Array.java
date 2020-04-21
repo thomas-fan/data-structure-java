@@ -149,6 +149,56 @@ public class Array {
         return -1;
     }
 
+    /**
+     * 删除数组指定元素并返回
+     *
+     * @param index
+     * @return
+     */
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed. Index is illegal.");
+        }
+
+        int ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+
+        size--;
+        return ret;
+    }
+
+    /**
+     * 删除数组第一个元素
+     *
+     * @return
+     */
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * 删除数组最后一个元素
+     *
+     * @return
+     */
+    public int removeLast() {
+        return remove(size - 1);
+    }
+
+    /**
+     * 删除指定元素 e
+     *
+     * @param e
+     */
+    public void removeElement(int e) {
+        int index = find(e);
+        if (index != -1) {
+            remove(index);
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
