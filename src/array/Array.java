@@ -1,7 +1,5 @@
 package array;
 
-import javax.xml.crypto.Data;
-
 public class Array<E> {
     private E[] data;
     private int size;
