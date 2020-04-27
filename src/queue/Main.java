@@ -1,17 +1,33 @@
 package queue;
 
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        ArrayQueue<Integer> queue = new ArrayQueue<>();
-        for (int i = 0; i < 10; i++) {
-            queue.enqueue(i);
+        int optCount =100000;
+        ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
+        LoopQueue<Integer> loopQueue = new LoopQueue<>();
+        double arrayQueueTime = testQueue(arrayQueue, optCount);
+        double loopQueueTime = testQueue(loopQueue, optCount);
+        System.out.println("ArrayQueue, time:" + arrayQueueTime + "s");
+        System.out.println("LoopQueue, time:" + loopQueueTime + "s");
+    }
+
+    private static double testQueue(Queue<Integer> queue, int opCount) {
+        long startTime = System.nanoTime();
+
+        Random random = new Random();
+        for (int i = 0; i < opCount; i++) {
+            queue.enqueue(random.nextInt(Integer.MAX_VALUE));
         }
 
-        System.out.println(queue);
-        queue.enqueue(100);
-        System.out.println(queue);
-        queue.dequeue();
-        System.out.println(queue);
+        for (int i = 0; i < opCount; i++) {
+            queue.dequeue();
+        }
+
+        long endTime = System.nanoTime();
+
+        return (endTime - startTime) / 1000000000.0;
     }
 
 }
