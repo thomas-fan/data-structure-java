@@ -24,11 +24,11 @@ public class LinkedList<E> {
         }
     }
 
-    private Node head;
     private int size;
+    private Node dummyHead;
 
     public LinkedList() {
-        head = null;
+        dummyHead = new Node(null, null);
         size = 0;
     }
 
@@ -37,11 +37,7 @@ public class LinkedList<E> {
     }
 
     public void addFirst(E e) {
-        Node node = new Node(e);
-        node.next = head;
-        head = node;
-//        head = new Node(e, head); // 上面三行，等价于
-        size++;
+        add(0, e);
     }
 
     public void add(int index, E e) {
@@ -49,20 +45,15 @@ public class LinkedList<E> {
             throw new IllegalArgumentException("Add failed! Illegal index.");
         }
 
-        if (index == 0) {
-            addFirst(e);
-        } else {
-            Node prev = head;
-            for (int i = 0; i < index - 1; i++) {
-                prev = prev.next;
-            }
-
-            Node node = new Node(e);
-            node.next = prev.next;
-            prev.next = node;
-//        prev.next = new Node(e, prev.next); // 上面三行，等价于
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
         }
 
+        Node node = new Node(e);
+        node.next = prev.next;
+        prev.next = node;
+//        prev.next = new Node(e, prev.next); // 上面三行，等价于
         size++;
     }
 
