@@ -60,4 +60,92 @@ public class LinkedList<E> {
     public void addLast(E e) {
         add(size, e);
     }
+
+    public E get(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Get failed! Illegal index.");
+        }
+
+        Node current = dummyHead.next;
+
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        return current.e;
+    }
+
+    public E getFirst() {
+        return get(0);
+    }
+
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    public void set(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Set failed! Illegal index.");
+        }
+
+        Node current = dummyHead.next;
+
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+
+        current.e = e;
+    }
+
+    public E remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Remove failed! Illegal index.");
+        }
+
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+
+        Node retNode = prev.next;
+        prev.next = retNode.next;
+        retNode.next = null;
+        size--;
+        return retNode.e;
+    }
+
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    public E removeLast() {
+        return remove(size - 1);
+    }
+
+    public boolean contains(E e) {
+        Node current = dummyHead.next;
+        while (current != null) {
+            if (current.e == e) {
+                return true;
+            }
+
+            current = current.next;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node current = dummyHead.next;
+        while (current != null) {
+            sb.append(current + "->");
+            current = current.next;
+        }
+
+        sb.append("Null");
+
+        return sb.toString();
+    }
 }
