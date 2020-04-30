@@ -122,6 +122,10 @@ public class LinkedList<E> {
         return remove(size - 1);
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public boolean contains(E e) {
         Node current = dummyHead.next;
         while (current != null) {
