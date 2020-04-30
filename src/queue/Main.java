@@ -7,10 +7,13 @@ public class Main {
         int optCount =100000;
         ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
         LoopQueue<Integer> loopQueue = new LoopQueue<>();
+        LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
         double arrayQueueTime = testQueue(arrayQueue, optCount);
         double loopQueueTime = testQueue(loopQueue, optCount);
+        double linkedListQueueTime = testQueue(linkedListQueue, optCount);
         System.out.println("ArrayQueue, time:" + arrayQueueTime + "s");
         System.out.println("LoopQueue, time:" + loopQueueTime + "s");
+        System.out.println("LinkedListQueue, time:" + linkedListQueueTime + "s");
     }
 
     private static double testQueue(Queue<Integer> queue, int opCount) {
