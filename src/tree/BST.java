@@ -157,6 +157,30 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    public E minimum () {
+        return minimum(node).e;
+    }
+
+    private Node minimum(Node node){
+        if (node.left == null) {
+            return node;
+        }
+
+        return minimum(node.left);
+    }
+
+    public E maximum() {
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node) {
+        if (node.right == null) {
+            return node;
+        }
+
+        return maximum(node.right);
+    }
+
     @Override
     public String toString() {
        StringBuilder sb = new StringBuilder();
