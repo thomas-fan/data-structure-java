@@ -104,7 +104,7 @@ public class BST<E extends Comparable<E>> {
     }
 
     private void preOrder(Node node) {
-        if (node == null){
+        if (node == null) {
             return;
         }
 
@@ -132,8 +132,8 @@ public class BST<E extends Comparable<E>> {
     }
 
     private void postOrder(Node node) {
-        if (node == null){
-            return ;
+        if (node == null) {
+            return;
         }
 
         postOrder(node.left);
@@ -157,11 +157,11 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-    public E minimum () {
-        return minimum(node).e;
+    public E minimum() {
+        return minimum(root).e;
     }
 
-    private Node minimum(Node node){
+    private Node minimum(Node node) {
         if (node.left == null) {
             return node;
         }
@@ -181,11 +181,47 @@ public class BST<E extends Comparable<E>> {
         return maximum(node.right);
     }
 
+    public E removeMin() {
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    public Node removeMin(Node node) {
+        if (node.left == null) {
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    public E removeMax() {
+        E ret = maximum();
+        root = removeMax(root);
+        return ret;
+    }
+
+    private Node removeMax(Node node) {
+        if (node.right == null) {
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+
+        node.right = removeMax(node.right);
+        return node;
+    }
+
     @Override
     public String toString() {
-       StringBuilder sb = new StringBuilder();
-       generateBSTString(root, 0, sb);
-       return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        generateBSTString(root, 0, sb);
+        return sb.toString();
     }
 
     private void generateBSTString(Node node, int depth, StringBuilder sb) {
@@ -201,7 +237,7 @@ public class BST<E extends Comparable<E>> {
 
     private String generateDepthString(int depth) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i< depth; i ++) {
+        for (int i = 0; i < depth; i++) {
             sb.append("--");
         }
 
