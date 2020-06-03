@@ -15,7 +15,7 @@ public class Main {
         ArrayList<String > words = new ArrayList<>();
         if (FileOperation.readFile(path, words)) {
             System.out.println("Total words: " + words.size());
-            BSTSet<String > set = new BSTSet<>();
+            LinkedListSet<String > set = new LinkedListSet<>();
             for (String word: words) {
                 set.add(word);
             }

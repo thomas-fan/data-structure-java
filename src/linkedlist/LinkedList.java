@@ -114,6 +114,22 @@ public class LinkedList<E> {
         return retNode.e;
     }
 
+    public void removeElement(E e) {
+        Node prev = dummyHead;
+        while (prev.next != null) {
+            if (prev.next.e.equals(e)) {
+                break;
+            }
+            prev = prev.next;
+        }
+
+        if (prev.next != null) {
+            Node delNode = prev.next;
+            prev.next = delNode.next;
+            delNode.next = null;
+        }
+    }
+
     public E removeFirst() {
         return remove(0);
     }
@@ -129,7 +145,7 @@ public class LinkedList<E> {
     public boolean contains(E e) {
         Node current = dummyHead.next;
         while (current != null) {
-            if (current.e == e) {
+            if (current.e.equals(e)) {
                 return true;
             }
 
