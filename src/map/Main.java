@@ -10,7 +10,7 @@ public class Main {
         ArrayList<String > words = new ArrayList<>();
         if (FileOperation.readFile("pride-and-prejudice.txt", words)) {
             System.out.println("Total words: " + words.size());
-            LinkedListMap<String, Integer> map = new LinkedListMap<>();
+            BSTMap<String, Integer> map = new BSTMap<>();
             for (String word: words) {
                 if(map.contains(word) ) {
                     map.set(word, map.get(word) + 1);
