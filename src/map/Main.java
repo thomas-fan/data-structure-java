@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Pride and Prejudice");
+        System.out.println(testMap(new BSTMap<String, Integer>(), "pride-and-prejudice.txt"));
+        System.out.println(testMap(new LinkedListMap<String, Integer>(), "pride-and-prejudice.txt"));
+    }
+    private static double testMap(Map<String, Integer> map, String filename) {
+        long startTime = System.nanoTime();
+        System.out.println(filename);
         ArrayList<String > words = new ArrayList<>();
-        if (FileOperation.readFile("pride-and-prejudice.txt", words)) {
+        if (FileOperation.readFile(filename, words)) {
             System.out.println("Total words: " + words.size());
-            BSTMap<String, Integer> map = new BSTMap<>();
             for (String word: words) {
                 if(map.contains(word) ) {
                     map.set(word, map.get(word) + 1);
@@ -23,5 +27,7 @@ public class Main {
             System.out.println("Frequency of PRIDE: " + map.get("pride"));
             System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
         }
+        long endTime = System.nanoTime();
+        return (endTime - startTime) / 1000000000.0;
     }
 }
