@@ -1,5 +1,6 @@
 package array;
 
+
 public class Array<E> {
     private E[] data;
     private int size;
@@ -19,6 +20,15 @@ public class Array<E> {
      */
     public Array() {
         this(10);
+    }
+
+    public Array(E[] arr) {
+        data = (E[]) new Object[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+
+        size = arr.length;
     }
 
     /**
@@ -117,7 +127,7 @@ public class Array<E> {
      * @param index
      * @param e
      */
-    void set(int index, E e) {
+    public void set(int index, E e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed. Index is illegal.");
         }
