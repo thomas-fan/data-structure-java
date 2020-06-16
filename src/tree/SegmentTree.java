@@ -35,7 +35,37 @@ public class SegmentTree<E> {
         buildSegmentTree(rightTreeIndex, mid + 1, r);
 
         // 业务逻辑
-        tree[treeIndex] = merger.merge(tree[leftTreeIndex] ,tree[rightTreeIndex]);
+        tree[treeIndex] = merger.merge(tree[leftTreeIndex], tree[rightTreeIndex]);
+    }
+
+    public E query(int queryL, int queryR) {
+        if (queryL < 0 || queryL >= data.length ||
+                queryR < 0 || queryR >= data.length
+        ) {
+            throw new IllegalArgumentException("Index is illegal.");
+        }
+
+        return query(0, 0, data.length - 1, queryL, queryR);
+    }
+
+    // 以 treeId 为根的线段树中[l...r]的范围里,搜索区间[queryL...queryR]的值
+    private E query(int treeIndex, int l, int r, int queryL, int queryR) {
+        if (l == queryL && r == queryR) {
+            return tree[treeIndex];
+        }
+
+        int mid = l + (r - l) / 2;
+        int leftTreeIndex = leftChild(treeIndex);
+        int rightTreeIndex = rightChild(treeIndex);
+        if (queryL >= mid + 1) {
+            return query(rightTreeIndex, mid + 1, r, queryL, queryR);
+        } else if (queryR <= mid) {
+            return query(leftTreeIndex, l, mid, queryL, queryR);
+        } else {
+            E leftResult = query(leftTreeIndex, l, mid, queryL, mid);
+            E rightResult = query(rightTreeIndex, mid + 1, r, mid + 1, queryR);
+            return merger.merge(leftResult, rightResult);
+        }
     }
 
     public int getSize() {
@@ -65,11 +95,11 @@ public class SegmentTree<E> {
         for (int i = 0; i < tree.length; i++) {
             if (tree[i] != null) {
                 sb.append(tree[i]);
-            }else {
+            } else {
                 sb.append("null");
             }
 
-            if (i != tree.length -1) {
+            if (i != tree.length - 1) {
                 sb.append(", ");
             }
         }

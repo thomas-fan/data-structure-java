@@ -9,7 +9,8 @@ public class Main {
     private static void testSegmentTree() {
         Integer[] nums = {-2, 0, 3, -5, 2, -1};
         SegmentTree<Integer> st = new SegmentTree<>(nums, Integer::sum);
-        System.out.println(st);
+//        System.out.println(st);
+        System.out.println(st.query(0, 2));
     }
 
     private static void testBST() {
