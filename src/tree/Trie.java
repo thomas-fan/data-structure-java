@@ -62,8 +62,8 @@ public class Trie {
 
     public boolean isPrefix(String prefix) {
         Node cur = root;
-        for (int i = 0; i < word.length(); i++) {
-            Character c = word.charAt(i);
+        for (int i = 0; i < prefix.length(); i++) {
+            Character c = prefix.charAt(i);
             if (cur.next.get(c) == null) {
                 return false;
             }
