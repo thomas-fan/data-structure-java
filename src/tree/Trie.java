@@ -33,7 +33,7 @@ public class Trie {
         Node cur = root;
         for (int i = 0; i < word.length(); i++) {
             Character c = word.charAt(i);
-            if (cur.next.get(c) != null) {
+            if (cur.next.get(c) == null) {
                 cur.next.put(c, new Node());
             }
 
@@ -48,7 +48,7 @@ public class Trie {
 
     public boolean contains(String word) {
         Node cur = root;
-        for (int i = 0; i < word.length(),i++){
+        for (int i = 0; i < word.length(); i++) {
             Character c = word.charAt(i);
             if (cur.next.get(c) == null) {
                 return false;
