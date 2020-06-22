@@ -9,7 +9,35 @@ public class Main {
     public static void main(String[] args) {
 //        testBST();
 //        testSegmentTree();
-        testTrie();
+//        testTrie();
+        testAVLTree();
+    }
+
+    private static void testAVLTree() {
+        String filename = "pride-and-prejudice.txt";
+        AVLTree<String, Integer> map = new AVLTree<>();
+        long startTime = System.nanoTime();
+        System.out.println(filename);
+        ArrayList<String > words = new ArrayList<>();
+        if (FileOperation.readFile(filename, words)) {
+            System.out.println("Total words: " + words.size());
+            for (String word: words) {
+                if(map.contains(word) ) {
+                    map.set(word, map.get(word) + 1);
+                } else {
+                    map.add(word, 1);
+                }
+            }
+
+            System.out.println("Total different words: " + map.getSize());
+            System.out.println("Frequency of PRIDE: " + map.get("pride"));
+            System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
+        }
+        long endTime = System.nanoTime();
+        double second = (endTime - startTime) / 1000000000.0;
+        System.out.println("Cost time: " + second + "s");
+        System.out.println("Is balanced " + map.isBalanced());
+        System.out.println("Is BST " + map.isBST());
     }
 
     private static void testTrie() {
