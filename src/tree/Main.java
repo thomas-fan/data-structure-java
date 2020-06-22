@@ -38,6 +38,12 @@ public class Main {
         System.out.println("Cost time: " + second + "s");
         System.out.println("Is balanced " + map.isBalanced());
         System.out.println("Is BST " + map.isBST());
+        for (String word: words) {
+            map.remove(word);
+            if (!map.isBST() || !map.isBalanced()) {
+                throw new RuntimeException("Error");
+            }
+        }
     }
 
     private static void testTrie() {
